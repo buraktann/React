@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { GetAllProductsModel } from "../../models/responses/GetAllProductsModel";
 import { ProductModel } from "../../models/responses/ProductModel";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import ProductService from "../../services/ProductService";
 
 type Props = {};
 
@@ -13,12 +14,10 @@ const Homepage = (props: Props) => {
     fetchProducts();
   }, []);
   const fetchProducts = () => {
-    //axios
-    axios
-      .get<GetAllProductsModel>("https://dummyjson.com/products")
-      .then((response) => {
-        setProducts(response.data.products);
-      });
+  let service:ProductService = new ProductService();
+  service.getAll().then(response => {
+    setProducts(response.data.products);
+  })
   };
 
   return (
@@ -27,6 +26,7 @@ const Homepage = (props: Props) => {
         {products.map((product) => (
           <div key={product.id} className="col-3">
             <ProductCard product={product}/></div>
+            
         ))}
       </div>
     </div>
