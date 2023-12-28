@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 import { ReactElement } from 'react';
+=======
+import React, { ReactElement } from 'react';
+import logo from './logo.svg';
+import './App.css';
+>>>>>>> 435cbf5fbc1d477fa2d72389805a16e1e75ffee2
 
 function App():ReactElement {
   return (
