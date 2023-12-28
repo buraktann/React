@@ -1,10 +1,10 @@
 import React from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import { ProductModel } from "../../models/responses/ProductModel";
 
 type Props = {
-    product:ProductModel;
-    title?:string
+  product: ProductModel;
+  title?: string;
 };
 
 // ? => Bir alanı nullable yapar.
