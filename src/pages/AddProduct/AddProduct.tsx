@@ -1,5 +1,7 @@
-import { Form, Formik, Field } from "formik";
+import { Form, Formik, Field, ErrorMessage } from "formik";
 import React from "react";
+import { object, string, number } from "yup";
+import FormikInput from "../../components/FormikInput/FormikInput";
 
 type Props = {};
 
@@ -11,6 +13,16 @@ const AddProduct = (props: Props) => {
     stock: "0",
   };
 
+  const validationSchema = object({
+    title: string()
+      .required("Başlık alanı zorunludur.")
+      .min(3, "Başlık alanı en az 3 karakterli olmalıdır.")
+      .max(50),
+    description: string().required().min(5).max(300),
+    price: number().required().min(0), //positive = min(0) alternatif
+    stock: number().required().min(0).integer(),
+  });
+
   return (
     <div className="container mt-5">
       <Formik
@@ -18,24 +30,13 @@ const AddProduct = (props: Props) => {
         onSubmit={(values) => {
           console.log(values);
         }}
+        validationSchema={validationSchema}
       >
         <Form>
-          <div className="mb-3">
-            <label className="form-label">Ürün Adı</label>
-            <Field name="title" type="text" className="form-control" />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Ürün Açıklaması</label>
-            <Field name="description" type="text" className="form-control" />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Ürün Fiyatı</label>
-            <Field name="price" type="number" className="form-control" />
-          </div>
-          <div className="mb-3">
-            <label className="form-label">Ürün Stok</label>
-            <Field name="stock" type="number" className="form-control" />
-          </div>
+          <FormikInput name="title" label="Ürün Adı" placeHolder="Ürün adı giriniz..."/>
+          <FormikInput name="description" label="Ürün Açıklaması" />
+          <FormikInput name="price" label="Ürün Fiyatı" type="number"/>
+          <FormikInput name="stock" label="Ürün Stok" />
           <button type="submit" className="btn btn-primary">
             Kaydet
           </button>
