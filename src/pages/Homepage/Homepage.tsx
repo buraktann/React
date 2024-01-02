@@ -13,11 +13,16 @@ const Homepage = (props: Props) => {
   useEffect(() => {
     fetchProducts();
   }, []);
+
+  // 1- Birden fazla nokta da kullanılabilir.
+  // 2- Sorumluluğun UI dosyası üzerinden kalkması
+  // 3- Ortak bir noktadan yönetebilmek için
+
   const fetchProducts = () => {
-  let service:ProductService = new ProductService();
-  service.getAll().then(response => {
-    setProducts(response.data.products);
-  })
+    let service: ProductService = new ProductService();
+    service.getAll().then((response) => {
+      setProducts(response.data.products);
+    });
   };
 
   return (
@@ -25,8 +30,8 @@ const Homepage = (props: Props) => {
       <div className="row">
         {products.map((product) => (
           <div key={product.id} className="col-3">
-            <ProductCard product={product}/></div>
-            
+            <ProductCard product={product} />
+          </div>
         ))}
       </div>
     </div>

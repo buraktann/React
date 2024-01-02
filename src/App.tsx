@@ -1,19 +1,21 @@
 import { ReactElement } from "react";
-import { BrowserRouter , Routes,Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage/Homepage";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
+import Navbar from "./components/Navbar/Navbar";
 
 function App(): ReactElement {
-  return <BrowserRouter>
-  <Routes>
-<Route path="/" element={<Homepage />}>  </Route>
-<Route path="/product-detail/:id" element={<ProductDetail />}>  </Route>
-  </Routes>
-  
-  </BrowserRouter>
- 
-  
+  return (
+    <>
+      <Navbar />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Homepage />}></Route>
+          <Route path="/product-detail/:id" element ={<ProductDetail />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
 }
+
 export default App;
-
-
