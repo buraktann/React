@@ -20,7 +20,13 @@ const AddProduct = (props: Props) => {
       .max(50),
     description: string().required().min(5).max(300),
     price: number().required().min(0), //positive = min(0) alternatif
-    stock: number().required().min(0).integer(),
+    stock: number()
+      .required()
+      .min(0)
+      .integer()
+      .test("my-custom-rule", "Deneme", (value, context) => {
+        return false;
+      }),
   });
 
   return (
@@ -33,9 +39,13 @@ const AddProduct = (props: Props) => {
         validationSchema={validationSchema}
       >
         <Form>
-          <FormikInput name="title" label="Ürün Adı" placeHolder="Ürün adı giriniz..."/>
+          <FormikInput
+            name="title"
+            label="Ürün Adı"
+            placeHolder="Ürün adı giriniz..."
+          />
           <FormikInput name="description" label="Ürün Açıklaması" />
-          <FormikInput name="price" label="Ürün Fiyatı" type="number"/>
+          <FormikInput name="price" label="Ürün Fiyatı" type="number" />
           <FormikInput name="stock" label="Ürün Stok" />
           <button type="submit" className="btn btn-primary">
             Kaydet
